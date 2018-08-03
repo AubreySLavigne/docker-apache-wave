@@ -26,13 +26,7 @@ RUN apt-get update \
         vim \
         wget 
     
-WORKDIR /Development
-RUN hg clone https://wave-protocol.googlecode.com/hg/ wave
+WORKDIR /usr/local/bin
+RUN git clone https://github.com/apache/incubator-wave wave
 
-WORKDIR /Development/wave
-RUN ant -f server-config.xml \
-    && ant compile-gwt dist-server \
-    && sed -i 's/localhost/0.0.0.0/g' server.config
-    
-CMD ./run-server.sh
-EXPOSE 9898:9898
+WORKDIR /usr/local/bin/wave
